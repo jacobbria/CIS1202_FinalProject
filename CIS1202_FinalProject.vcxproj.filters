@@ -18,9 +18,12 @@
     <ClCompile Include="CIS1202_FinalProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BOUT.h">
+    <ClInclude Include="Bout.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
