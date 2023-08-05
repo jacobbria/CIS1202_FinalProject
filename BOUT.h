@@ -9,7 +9,7 @@
 class Bout
 {
 
-private:
+protected:
 	std::string boutTitle;	// will be winnerLast + loserLast... ex. "Smith v Brown"
 	std::string weightClass;
 	std::string winnerFirst;
