@@ -5,6 +5,9 @@
 // Enter in a MMA bout that ended with a finish and get resultant statistics
 
 #include <iostream>
+#include "Bout.h"
+#include "Submission.h"
+
 
 
 int main()

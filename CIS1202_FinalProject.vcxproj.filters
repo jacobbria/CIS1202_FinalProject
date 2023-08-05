@@ -32,5 +32,8 @@
     <ClInclude Include="Submission.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Knockout.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

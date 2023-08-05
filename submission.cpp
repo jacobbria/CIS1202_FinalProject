@@ -21,7 +21,6 @@ Submission::Submission(std::string st, submissionPosition sp, std::string bt, st
 	std::string losF, std::string losL, int min, int sec, int rd, int yr) :Bout() {
 	submissionType = st;
 	position = sp;
-
 }
 
 // setters
