@@ -2,7 +2,7 @@
 #ifndef KNOCKOUT_H
 #define KNOCKOUT_H
 
-#include "Bout.h";
+#include "Bout.h"
 #include <iostream>
 
 class Knockout : public Bout {

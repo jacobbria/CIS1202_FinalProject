@@ -32,15 +32,5 @@ public:
 	submissionPosition getPosition() const;
 };
 
-
-
-
-
-
-
-
-
-
-
 #endif // !SUBMISSION_H
 
