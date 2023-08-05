@@ -1,11 +1,12 @@
 #pragma once
-#ifndef BOUT.H
-#define BOUT.H
+#ifndef BOUT_H
+#define BOUT_H
 
 #include <iostream>
 #include <string>
 
 // This Header class file for the parents class to subsequent bouts with specific finish types
+
 class Bout
 {
 
@@ -52,14 +53,4 @@ public:
 
 };
 
-
-
-
-
-
-
-
-
-
-
-#endif
+#endif BOUT_H

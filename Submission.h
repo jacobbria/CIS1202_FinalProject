@@ -1,6 +1,6 @@
 #pragma once
-#ifndef SUBMISSION.H
-#define SUBMISSION.H
+#ifndef SUBMISSION_H
+#define SUBMISSION_H
 
 #include "Bout.h"	// parent class included
 #include <iostream>
@@ -42,5 +42,5 @@ public:
 
 
 
-#endif // !SUBMISSION.H
+#endif // !SUBMISSION_H
 

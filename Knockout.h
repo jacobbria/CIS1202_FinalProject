@@ -1,6 +1,6 @@
 #pragma once
-#ifndef KNOCKOUT.H
-#define KNOCKOUT.H
+#ifndef KNOCKOUT_H
+#define KNOCKOUT_H
 
 #include "Bout.h";
 #include <iostream>
@@ -21,4 +21,4 @@ public:
 	std::string getKnockoutTechnique();
 };
 
-#endif // KNOCKOUT.H
+#endif // KNOCKOUT_H
