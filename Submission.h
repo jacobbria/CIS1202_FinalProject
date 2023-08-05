@@ -18,51 +18,18 @@ private:
 	submissionPosition position; // position of submission
 
 public:
-	Submission() :Bout() {	// default constructor
-		submissionType = "";
-		position = OTHER;
-		boutTitle = "";
-		weightClass = "";
-		winnerFirst = "";
-		winnerLast = "";
-		loserFirst = "";
-		loserLast = "";
-		minute = 0;
-		seconds = 0;
-		year = 0;
-	}
-
+	// child prototypes
+	Submission();
 	Submission(std::string st, submissionPosition sp, std::string bt, std::string wc, std::string wf, std::string wl,
-		std::string losF, std::string losL, int min, int sec, int rd, int yr) :Bout() {
-		submissionType = st;
-		position = sp;
-	
-	}
+		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 
 	// setters
-	void setSubmissionType(std::string st) {
-		submissionType = st;
-	}
-	void setPosition(submissionPosition sp) {
-		position = sp;
-	}
+	void setSubmissionType(std::string st);
+	void setPosition(submissionPosition sp);
 
 	// getters
-	std::string getSubmissionType() {
-		return submissionType;
-	}
-	submissionPosition getPosition() {
-		return position;
-	}
-
-
-
-
-
-
-
-
-
+	std::string getSubmissionType() const;
+	submissionPosition getPosition() const;
 };
 
 
