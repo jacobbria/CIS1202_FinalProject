@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="CIS1202_FinalProject.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BOUT.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
