@@ -5,8 +5,8 @@
 // Enter in a MMA bout that ended with a finish and get resultant statistics
 
 #include <iostream>
-#include "Bout.h"
-#include "Submission.h"
+#include "Bout.h"	// parent class
+#include "Submission.h"	// child class for a bout ended in a submission
 
 
 

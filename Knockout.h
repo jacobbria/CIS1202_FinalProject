@@ -10,34 +10,15 @@ private:
 	std::string knockoutTechnique;
 	
 public:
-	Knockout() : Bout() {	// default constrcutor
-		knockoutTechnique = "";
-		boutTitle = "";
-		weightClass = "";
-		winnerFirst = "";
-		winnerLast = "";
-		loserFirst = "";
-		loserLast = "";
-		minute = 0;
-		seconds = 0;
-		year = 0;
-	}
-	
+	Knockout();
 	Knockout(std::string kot, std::string bt, std::string wc, std::string wf, std::string wl,
-		std::string losF, std::string losL, int min, int sec, int rd, int yr) : Bout() {
-		knockoutTechnique = kot;
-
-	}
+		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 
 	// setters
-	void setKnockoutTechnique(std::string kot) {
-		knockoutTechnique = kot;
-	}
+	void setKnockoutTechnique(std::string kot);
 
 	// getters
-	std::string getKnockoutTechnique() {
-		return knockoutTechnique;
-	}
+	std::string getKnockoutTechnique();
 };
 
 #endif // KNOCKOUT.H

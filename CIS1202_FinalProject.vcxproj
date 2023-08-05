@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="CIS1202_FinalProject.cpp" />
     <ClCompile Include="bout.cpp" />
+    <ClCompile Include="knockout.cpp" />
     <ClCompile Include="submission.cpp" />
   </ItemGroup>
   <ItemGroup>

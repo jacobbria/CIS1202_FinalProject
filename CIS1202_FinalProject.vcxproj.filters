@@ -24,6 +24,9 @@
     <ClCompile Include="submission.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="knockout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bout.h">
