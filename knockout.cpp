@@ -3,7 +3,6 @@
 
 Knockout::Knockout() : Bout() {	// default constrcutor
 	knockoutTechnique = "";
-	boutTitle = "";
 	weightClass = "";
 	winnerFirst = "";
 	winnerLast = "";
@@ -14,7 +13,7 @@ Knockout::Knockout() : Bout() {	// default constrcutor
 	year = 0;
 }
 
-Knockout::Knockout(std::string kot, std::string bt, std::string wc, std::string wf, std::string wl,
+Knockout::Knockout(std::string kot,std::string wc, std::string wf, std::string wl,
 	std::string losF, std::string losL, int min, int sec, int rd, int yr) : Bout() {
 	
 	knockoutTechnique = kot;

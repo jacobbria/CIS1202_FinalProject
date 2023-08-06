@@ -11,7 +11,7 @@ private:
 	
 public:
 	Knockout();
-	Knockout(std::string kot, std::string bt, std::string wc, std::string wf, std::string wl,
+	Knockout(std::string kot,std::string wc, std::string wf, std::string wl,
 		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 
 	// setters

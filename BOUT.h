@@ -17,28 +17,32 @@ protected:
 	std::string winnerLast;
 	std::string loserFirst;
 	std::string loserLast;
+	std::string timeClock;
 	int minute;
 	int seconds;
 	int round;
 	int year;	// year bout occured in
 
+
 public:
 	Bout();
 
-	Bout(std::string bt, std::string wc, std::string wf, std::string wl,
+	Bout(std::string wc, std::string wf, std::string wl,
 		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 	
 	// setter prototypes
-	void setBoutTitle(const std::string& title);
+	void setBoutTitle();
 	void setWeightClass(const std::string& weightclass);
 	void setWinnerFirst(const std::string& winnerfirst);
 	void setWinnerLast(const std::string& winnerlast);
 	void setLoserFirst(const std::string& loserfirst);
 	void setLoserLast(const std::string& loserlast);
+	void setTimeClock(int minute, int seconds);
 	void setMinute(int min);
 	void setSeconds(int sec);
 	void setRound(int rd);
 	void setYear(int yr);
+
 
 	// getter prototypes
 	std::string getBoutTitle() const;
@@ -47,10 +51,12 @@ public:
 	std::string getWinnerLast() const;
 	std::string getLoserFirst() const;
 	std::string getLoserLast() const;
+	std::string getTimeClock();
 	int getMinute() const;
 	int getSeconds() const;
 	int getRound() const;
 	int getYear() const;
+	
 
 };
 

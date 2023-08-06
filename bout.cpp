@@ -4,7 +4,7 @@
 // Implementation page of Bout.h header file
 
 Bout::Bout() {	// default constructor
-	boutTitle = "";
+	
 	weightClass = "";
 	winnerFirst = "";
 	winnerLast = "";
@@ -15,10 +15,9 @@ Bout::Bout() {	// default constructor
 	year = 0;
 }
 
-Bout::Bout(std::string bt, std::string wc, std::string wf, std::string wl,
+Bout::Bout(std::string wc, std::string wf, std::string wl,
 	std::string losF, std::string losL, int min, int sec, int rd, int yr) {
 
-	boutTitle = bt;
 	weightClass = wc;
 	winnerFirst = wf;
 	winnerLast = wl;
@@ -31,9 +30,6 @@ Bout::Bout(std::string bt, std::string wc, std::string wf, std::string wl,
 }
 
 // setters
-void Bout::setBoutTitle(const std::string& title) {
-	boutTitle = title;
-}
 void  Bout::setWeightClass(const std::string& weightclass) {
 	weightClass = weightclass;
 }
@@ -49,22 +45,26 @@ void  Bout::setLoserFirst(const std::string& loserfirst) {
 void Bout::setLoserLast(const std::string& loserlast) {
 	loserLast = loserlast;
 }
+void Bout::setTimeClock(int minute, int seconds) {
+	timeClock = std::to_string(minute) + ":" + std::to_string(seconds);
+}
 void  Bout::setMinute(int min) {
 	minute = min;
 }
 void  Bout::setSeconds(int sec) {
-	minute = sec;
+	seconds = sec;
 }
 void  Bout::setRound(int rd) {
-	minute = rd;
+	round = rd;
 }
 void Bout::setYear(int yr) {
-	minute = yr;
+	year = yr;
 }
+
 
 // getters
 	std::string Bout::getBoutTitle() const {
-		return boutTitle;
+		return winnerLast + " vs " + loserLast;
 	}
 	std::string Bout::getWeightClass() const {
 		return weightClass;
@@ -81,6 +81,9 @@ void Bout::setYear(int yr) {
 	std::string Bout::getLoserLast() const {
 		return loserLast;
 	}
+	std::string Bout::getTimeClock() {
+		return timeClock;
+	}
 	int Bout::getMinute() const {
 		return minute;
 	}
@@ -93,3 +96,5 @@ void Bout::setYear(int yr) {
 	int Bout::getYear() const {
 		return year;
 	}
+	
+	

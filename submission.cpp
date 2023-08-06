@@ -17,7 +17,7 @@ Submission::Submission() :Bout() {	// default constructor
 	year = 0;
 }
 
-Submission::Submission(std::string st, submissionPosition sp, std::string bt, std::string wc, std::string wf, std::string wl,
+Submission::Submission(std::string st, submissionPosition sp, std::string wc, std::string wf, std::string wl,
 	std::string losF, std::string losL, int min, int sec, int rd, int yr) :Bout() {
 	submissionType = st;
 	position = sp;
@@ -26,9 +26,12 @@ Submission::Submission(std::string st, submissionPosition sp, std::string bt, st
 // setters
 void Submission::setSubmissionType(const std::string st) {
 	submissionType = st;
+	for (char& c : submissionType) {
+		c = std::toupper(c);  // Convert each character to uppercase
+	}
 }
 void Submission::setPosition(int posInt) {
-	position = position = static_cast<Submission::submissionPosition>(posInt);
+	position = static_cast<Submission::submissionPosition>(posInt);
 }
 
 // getters
@@ -37,5 +40,17 @@ std::string Submission::getSubmissionType() const {
 }
 Submission::submissionPosition Submission::getPosition() const {
 	return position;
+}
+std::string Submission::getpositionToString() const {
+	switch (position) {
+	case GUARD: return "GUARD";
+	case MOUNT: return "MOUNT";
+	case BACK: return "BACK";
+	case TOPSIDE: return "TOP SIDE";
+	case BOTTOMSIDE: return "BOTTOM SIDE";
+	case STANDING: return "STANDING";
+	case OTHER: return "OTHER";
+	default: return "UNKNOWN";
+	}
 }
 

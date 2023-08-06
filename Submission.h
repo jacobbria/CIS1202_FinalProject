@@ -10,9 +10,8 @@
 // A Bout that ends with a Submission
 
 class Submission : public Bout {
-
-	enum submissionPosition {GUARD, MOUNT, BACK, TOPSIDE, BOTTOMSIDE, STANDING, OTHER};	// options for position where submission was hit from
-
+ 
+	enum submissionPosition { GUARD, MOUNT, BACK, TOPSIDE, BOTTOMSIDE, STANDING, OTHER };	// options for position where submission was hit from
 private:
 	std::string submissionType;	// name of submission
 	submissionPosition position; // position of submission
@@ -20,7 +19,7 @@ private:
 public:
 	// child prototypes
 	Submission();
-	Submission(std::string st, submissionPosition sp, std::string bt, std::string wc, std::string wf, std::string wl,
+	Submission(std::string st, submissionPosition sp,std::string wc, std::string wf, std::string wl,
 		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 
 	// setters
@@ -30,6 +29,7 @@ public:
 	// getters
 	std::string getSubmissionType() const;
 	submissionPosition getPosition() const;
+	std::string getpositionToString() const;
 };
 
 #endif // !SUBMISSION_H
