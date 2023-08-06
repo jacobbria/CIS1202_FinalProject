@@ -11,6 +11,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime> 
+#include <random>
 using std::cout; // save time with cout lines
 using std::endl;
 using std::cin;
@@ -62,7 +63,7 @@ int main()
 
 
 	
-
+	cout << "MMA Bout Tracker" << endl;
 	int menuChoice = 0;	// variable for user choice
 
 	do {
@@ -373,6 +374,10 @@ Knockout createKnockout() {
 	do {
 		cin >> seconds;
 		validate(seconds); // validate input
+		while (seconds < 0 || seconds > 59) {
+			cout << "Error! Re-enter seconds: ";
+			cin >> seconds; // Update seconds based on user input
+		}
 	} while (!cin);
 	knockout.setSeconds(seconds);
 
@@ -479,10 +484,11 @@ void displayFacts(std::vector<Submission>& allSubs, std::vector<Knockout>& allKo
 	} while (selection != 1);
 }
 int randomNumberGenerator(std::vector<std::string> facts) {
-	std::srand(static_cast<unsigned int>(std::time(nullptr))); // seed random number generator
-	int randomIndex = std::rand() % facts.size(); // generate random number based on vector size
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> distribution(0, facts.size() - 1);
 
-	return randomIndex;
+	return distribution(gen);
 }
 void generateRandomFact(std::vector<std::string>& facts, std::vector<Submission>& allSub, std::vector<Knockout>& allKo) {
     std::vector<quickestFactStruct> quickestSubmissions = findQuickestSubmissions(allSub);
@@ -510,8 +516,6 @@ void generateRandomFact(std::vector<std::string>& facts, std::vector<Submission>
 	}
 
 	facts[1] = factTwo;
-
-
 
 }
  std::vector<quickestFactStruct> findQuickestSubmissions(const std::vector<Submission>& allSub) {
