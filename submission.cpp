@@ -24,11 +24,9 @@ Submission::Submission(std::string st, submissionPosition sp, std::string wc, st
 }
 
 // setters
-void Submission::setSubmissionType(const std::string st) {
+void Submission::setSubmissionType(std::string& st) {
+	capitalizeAllLetters(st);
 	submissionType = st;
-	for (char& c : submissionType) {
-		c = std::toupper(c);  // Convert each character to uppercase
-	}
 }
 void Submission::setPosition(int posInt) {
 	position = static_cast<Submission::submissionPosition>(posInt);

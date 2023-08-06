@@ -21,7 +21,9 @@ Knockout::Knockout(std::string kot,std::string wc, std::string wf, std::string w
 }
 
 // setters
-void Knockout::setKnockoutTechnique(std::string kot) {
+void Knockout::setKnockoutTechnique(std::string& kot)
+{
+	capitalizeAllLetters(kot);
 	knockoutTechnique = kot;
 }
 

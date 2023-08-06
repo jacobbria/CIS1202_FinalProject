@@ -58,6 +58,7 @@ public:
 	
 	// ensure proper name grammar
 	void capitalizeFirstLetter(std::string& str);
+	void capitalizeAllLetters(std::string& str);
 };
 
 #endif BOUT_H

@@ -1,5 +1,6 @@
 #include "Bout.h"
 #include <iostream>
+#include <cctype>
 
 // Implementation page of Bout.h header file
 
@@ -114,6 +115,13 @@ void Bout::setYear(int yr) {
 			for (size_t i = 1; i < str.length(); ++i) {
 				str[i] = std::tolower(str[i]);
 			}
+		}
+	}
+
+	// capitalize all letters
+	void Bout::capitalizeAllLetters(std::string& str) {
+		for (char& c : str) {
+			c = std::toupper(c);  // Convert each character to uppercase
 		}
 	}
 

@@ -23,7 +23,7 @@ public:
 		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 
 	// setters
-	void setSubmissionType(std::string st);
+	void setSubmissionType(std::string& st);
 	void setPosition(int posInt);
 
 	// getters
