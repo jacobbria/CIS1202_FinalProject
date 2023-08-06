@@ -14,8 +14,22 @@ using std::endl;
 using std::cin;
 
 // prototypes
+bool validate(const std::string& input);
+void validate(int i);
 std::vector<Bout> combineAllBouts(std::vector<Submission>& allSubmissions, std::vector<Knockout>& allKnockouts);
 int mainMenu();
+void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko);
+Submission createSubmission();
+
+// template to validate input within a specific range
+template <typename T>
+void validateInput(T& input, const T& minValue, const T& maxValue) {
+	while (!(std::cin >> input) || input < minValue || input > maxValue) {
+		std::cout << "Error! Please enter a valid number between " << minValue << " and " << maxValue << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+}
 
 int main()
 {
@@ -29,13 +43,38 @@ int main()
 
 	do {
 
-		menuChoice = mainMenu();
+		menuChoice = mainMenu();	// recieve choice from function call
+		 
+		switch (menuChoice) {	// switch to choose appropriate option
+		case 1: 
+			enterBout(allSubmissions, allKnockouts); // send vectors by reference to get updated with new bouts
+			break;
+		case 2:
+
+			break;
+		case 3:
+
+			break;
+		case 4:
+			break;
+		}
+
 
 	} while (menuChoice != 5);
 
 
-
 	system("pause");
+}
+
+bool validate(const std::string& input) {	// validate string input
+	return input.find('\n') == std::string::npos;
+}
+void validate(int i) {	// validate int input (overloaded)
+	while (!cin) {
+		std::cout << "Error! Please enter a valid number. " << endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
 }
 
 std::vector<Bout> combineAllBouts(std::vector<Submission>& allSubmissions, std::vector<Knockout>& allKnockouts) {
@@ -65,19 +104,118 @@ int mainMenu() {
 	cout << "4. Random Fact Generator" << endl;
 	cout << "5. Exit" << endl;
 	cout << endl;
+	cout << "Enter a selection: ";
 
-	while (!cin || userChoice < 1 || userChoice > 5) {	// code block to validate user input
-		cout << "Enter a selection: ";
-		cin >> userChoice;	// get user input
+	validateInput(userChoice, 1, 5);	// validate userChoice
 
-		if (!cin || userChoice < 1 || userChoice > 5) {	// error in input
-			cout << "Error! Please enter a valid number 1-5" << endl;
-			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-	}
-		return userChoice;	// send the validated user input back to main
+	return userChoice;	// send the validated user input back to main
 	
 }
+void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko) {
+
+
+	int finishChoice;	// variable to decide how fight was finished
+	cout << "What method was this bout finished (0 for submission || 1 for knockout): ";
+	
+	validateInput(finishChoice, 0, 1); // validate the input
+
+	cout << "Please enter the following information: " << endl;
+
+	if (finishChoice = 0) {	// if a submission is selected
+
+
+
+	}
+	else {	// if a knockout is selected
+
+	}
+
+}
+Submission createSubmission() {
+	Submission submission;	// submission object to send back
+	
+	std::string weightclass;
+	do {	// validate input
+		cout << "Weight class: ";
+		getline(cin, weightclass);
+
+		if (!validate(weightclass)) {
+			std::cout << "Error: weightclass is incorrect length" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(weightclass));
+	submission.setWeightClass(weightclass);
+
+	std::string winnerFirst;
+	do {	// validate input
+		cout << "Winner's first name: ";
+		getline(cin, winnerFirst);
+
+		if (!validate(winnerFirst)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(winnerFirst));
+	submission.setWinnerFirst(winnerFirst);
+
+	std::string winnerLast;
+	do {	// validate input
+		cout << "Winner's last name: ";
+		getline(cin, winnerLast);
+
+		if (!validate(winnerLast)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(winnerLast));
+	submission.setWinnerFirst(winnerLast);
+
+	std::string loserFirst;
+	do {	// validate input
+		cout << "Loser's first name: ";
+		getline(cin, loserFirst);
+
+		if (!validate(loserFirst)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(loserFirst));
+	submission.setWinnerFirst(loserFirst);
+
+	std::string loserLast;
+	do {	// validate input
+		cout << "Loser's last name: ";
+		getline(cin, loserLast);
+
+		if (!validate(loserLast)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(loserLast));
+	submission.setWinnerFirst(loserLast);
+
+	int minute;
+	cout << "Minute stopped: ";
+	do {
+		cin >> minute;
+		validate(minute); // validate input
+	} while (!cin)
+
+
+
+
+
+
+
+
+}
+
+
+
 
 
