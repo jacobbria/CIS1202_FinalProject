@@ -46,6 +46,9 @@ void  Bout::setWinnerLast(const std::string& winnerlast) {
 void  Bout::setLoserFirst(const std::string& loserfirst) {
 	loserFirst = loserfirst;
 }
+void Bout::setLoserLast(const std::string& loserlast) {
+	loserLast = loserlast;
+}
 void  Bout::setMinute(int min) {
 	minute = min;
 }

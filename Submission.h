@@ -25,7 +25,7 @@ public:
 
 	// setters
 	void setSubmissionType(std::string st);
-	void setPosition(submissionPosition sp);
+	void setPosition(int posInt);
 
 	// getters
 	std::string getSubmissionType() const;

@@ -27,8 +27,8 @@ Submission::Submission(std::string st, submissionPosition sp, std::string bt, st
 void Submission::setSubmissionType(const std::string st) {
 	submissionType = st;
 }
-void Submission::setPosition(submissionPosition sp) {
-	position = sp;
+void Submission::setPosition(int posInt) {
+	position = position = static_cast<Submission::submissionPosition>(posInt);
 }
 
 // getters

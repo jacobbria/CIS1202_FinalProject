@@ -34,6 +34,7 @@ public:
 	void setWinnerFirst(const std::string& winnerfirst);
 	void setWinnerLast(const std::string& winnerlast);
 	void setLoserFirst(const std::string& loserfirst);
+	void setLoserLast(const std::string& loserlast);
 	void setMinute(int min);
 	void setSeconds(int sec);
 	void setRound(int rd);

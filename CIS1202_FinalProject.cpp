@@ -20,6 +20,7 @@ std::vector<Bout> combineAllBouts(std::vector<Submission>& allSubmissions, std::
 int mainMenu();
 void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko);
 Submission createSubmission();
+Knockout createKnockout();
 
 // template to validate input within a specific range
 template <typename T>
@@ -113,7 +114,6 @@ int mainMenu() {
 }
 void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko) {
 
-
 	int finishChoice;	// variable to decide how fight was finished
 	cout << "What method was this bout finished (0 for submission || 1 for knockout): ";
 	
@@ -121,18 +121,33 @@ void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko) {
 
 	cout << "Please enter the following information: " << endl;
 
-	if (finishChoice = 0) {	// if a submission is selected
+	if (finishChoice == 0) {	// if a submission is selected
 
-		Submission sub
+		Submission submission = createSubmission();	// create a new submission object
+
+		sub.push_back(submission);	// fill allSubmissions vector with new submission objects
+	}
+	else {
+		
+		Knockout knockout = createKnockout();
+
+		ko.push_back(knockout);
 
 	}
-	else {	// if a knockout is selected
-
-	}
-
+	
 }
-Submission createSubmission() {
+Submission createSubmission() {	// creates a submission object to be sent back 
 	Submission submission;	// submission object to send back
+
+	std::string submissiontype;
+	cout << "Submission type: ";
+	getline(cin, submissiontype);
+	submission.setSubmissionType(submissiontype);
+
+	int position;
+	cout << "Position submission was achieve from ( 0 = GUARD, 1 = MOUNT, 2 = BACK, 3 = TOP SIDE, 4 = BUTTOM SIDE, 5 = STANDING, 6 = OTHER): ";
+	validateInput(position, 0, 6); // validate input
+	submission.setPosition(position);
 	
 	std::string weightclass;
 	cout << "Weight class: ";
@@ -171,7 +186,7 @@ Submission createSubmission() {
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	} while (!validate(winnerLast));
-	submission.setWinnerFirst(winnerLast);
+	submission.setWinnerLast(winnerLast);
 
 	std::string loserFirst;
 	cout << "Loser's first name: ";
@@ -184,7 +199,7 @@ Submission createSubmission() {
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	} while (!validate(loserFirst));
-	submission.setWinnerFirst(loserFirst);
+	submission.setLoserFirst(loserFirst);
 
 	std::string loserLast;
 	cout << "Loser's last name: ";
@@ -197,7 +212,7 @@ Submission createSubmission() {
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	} while (!validate(loserLast));
-	submission.setWinnerFirst(loserLast);
+	submission.setLoserLast(loserLast);
 
 	int minute;
 	cout << "Minute stopped: ";
@@ -221,7 +236,7 @@ Submission createSubmission() {
 		cin >> round;
 		validate(round); // validate input
 	} while (!cin);
-	submission.setSeconds(round);
+	submission.setRound(round);
 
 	int year;
 	cout << "Year bout occured: ";
@@ -229,9 +244,118 @@ Submission createSubmission() {
 		cin >> year;
 		validate(year); // validate input
 	} while (!cin);
-	submission.setSeconds(year);
+	submission.setYear(year);
+
+
 
 	return submission; // send created submission object back
+}
+Knockout createKnockout() {
+	Knockout knockout;    // knockout object to send back
+
+	std::string technique;
+	cout << "Technique used for knockout: ";
+	getline(cin, technique);
+	knockout.setKnockoutTechnique(technique);
+
+	std::string weightclass;
+	cout << "Weight class: ";
+	do {    // validate input
+		getline(cin, weightclass);
+
+		if (!validate(weightclass)) {
+			std::cout << "Error: weightclass is incorrect length" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(weightclass));
+	knockout.setWeightClass(weightclass);
+
+	std::string winnerFirst;
+	cout << "Winner's first name: ";
+	do {    // validate input
+		getline(cin, winnerFirst);
+
+		if (!validate(winnerFirst)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(winnerFirst));
+	knockout.setWinnerFirst(winnerFirst);
+
+	std::string winnerLast;
+	cout << "Winner's last name: ";
+	do {    // validate input
+		getline(cin, winnerLast);
+
+		if (!validate(winnerLast)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(winnerLast));
+	knockout.setWinnerLast(winnerLast);
+
+	std::string loserFirst;
+	cout << "Loser's first name: ";
+	do {    // validate input
+		getline(cin, loserFirst);
+
+		if (!validate(loserFirst)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(loserFirst));
+	knockout.setLoserFirst(loserFirst);
+
+	std::string loserLast;
+	cout << "Loser's last name: ";
+	do {    // validate input
+		getline(cin, loserLast);
+
+		if (!validate(loserLast)) {
+			std::cout << "Error: name must be only one word" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!validate(loserLast));
+	knockout.setLoserLast(loserLast);
+
+	int minute;
+	cout << "Minute stopped: ";
+	do {
+		cin >> minute;
+		validate(minute); // validate input
+	} while (!cin);
+	knockout.setMinute(minute);
+
+	int seconds;
+	cout << "seconds stopped: ";
+	do {
+		cin >> seconds;
+		validate(seconds); // validate input
+	} while (!cin);
+	knockout.setSeconds(seconds);
+
+	int round;
+	cout << "round stopped: ";
+	do {
+		cin >> round;
+		validate(round); // validate input
+	} while (!cin);
+	knockout.setRound(round);
+
+	int year;
+	cout << "Year bout occurred: ";
+	do {
+		cin >> year;
+		validate(year); // validate input
+	} while (!cin);
+	knockout.setYear(year);
+
+	return knockout; // send created knockout object back
 }
 
 
