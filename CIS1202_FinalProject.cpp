@@ -123,7 +123,7 @@ void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko) {
 
 	if (finishChoice = 0) {	// if a submission is selected
 
-
+		Submission sub
 
 	}
 	else {	// if a knockout is selected
@@ -135,8 +135,8 @@ Submission createSubmission() {
 	Submission submission;	// submission object to send back
 	
 	std::string weightclass;
+	cout << "Weight class: ";
 	do {	// validate input
-		cout << "Weight class: ";
 		getline(cin, weightclass);
 
 		if (!validate(weightclass)) {
@@ -148,8 +148,8 @@ Submission createSubmission() {
 	submission.setWeightClass(weightclass);
 
 	std::string winnerFirst;
+	cout << "Winner's first name: ";
 	do {	// validate input
-		cout << "Winner's first name: ";
 		getline(cin, winnerFirst);
 
 		if (!validate(winnerFirst)) {
@@ -161,8 +161,8 @@ Submission createSubmission() {
 	submission.setWinnerFirst(winnerFirst);
 
 	std::string winnerLast;
+	cout << "Winner's last name: ";
 	do {	// validate input
-		cout << "Winner's last name: ";
 		getline(cin, winnerLast);
 
 		if (!validate(winnerLast)) {
@@ -174,8 +174,8 @@ Submission createSubmission() {
 	submission.setWinnerFirst(winnerLast);
 
 	std::string loserFirst;
+	cout << "Loser's first name: ";
 	do {	// validate input
-		cout << "Loser's first name: ";
 		getline(cin, loserFirst);
 
 		if (!validate(loserFirst)) {
@@ -187,8 +187,8 @@ Submission createSubmission() {
 	submission.setWinnerFirst(loserFirst);
 
 	std::string loserLast;
+	cout << "Loser's last name: ";
 	do {	// validate input
-		cout << "Loser's last name: ";
 		getline(cin, loserLast);
 
 		if (!validate(loserLast)) {
@@ -204,15 +204,34 @@ Submission createSubmission() {
 	do {
 		cin >> minute;
 		validate(minute); // validate input
-	} while (!cin)
+	} while (!cin);
+	submission.setMinute(minute);
 
+	int seconds;
+	cout << "seconds stopped: ";
+	do {
+		cin >> seconds;
+		validate(seconds); // validate input
+	} while (!cin);
+	submission.setSeconds(seconds);
 
+	int round;
+	cout << "round stopped: ";
+	do {
+		cin >> round;
+		validate(round); // validate input
+	} while (!cin);
+	submission.setSeconds(round);
 
+	int year;
+	cout << "Year bout occured: ";
+	do {
+		cin >> year;
+		validate(year); // validate input
+	} while (!cin);
+	submission.setSeconds(year);
 
-
-
-
-
+	return submission; // send created submission object back
 }
 
 
