@@ -9,19 +9,41 @@
 #include "Submission.h"	// child class for a bout ended in a submission
 #include "Knockout.h"
 #include <vector>
+#include <cstdlib>
+#include <ctime> 
 using std::cout; // save time with cout lines
 using std::endl;
 using std::cin;
 
+struct quickestFactStruct {	// struct for use in random fact generator
+
+	std::string quickestFirst;
+	std::string quickestLast;
+	int quickestYear;
+	int quickestMin;
+	int quickestSec;
+};
+
 // prototypes
 bool validate(const std::string& input);	// validate strings for one-word
 void validate(int i); // validate ints
+
 std::vector<Bout> combineAllBouts(std::vector<Submission>& allSubmissions, std::vector<Knockout>& allKnockouts);	// adds two finish type vectors to one vector
+
 int mainMenu(); // creates a user driven menu
+
 void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko); // user enters a Bout
 Submission createSubmission(); // creates submission object for use in vector
 Knockout createKnockout();	// creates a knockout object for use in vector
-void listBouts(std::vector<Bout>& allBouts, std::vector<Submission>& allSub, std::vector<Knockout>& allKO);	// prints out 
+
+void listBouts(std::vector<Bout>& allBouts, std::vector<Submission>& allSub, std::vector<Knockout>& allKO);	// prints out desired bouts
+
+void displayFacts(std::vector<Submission>&, std::vector<Knockout>&); // will display random facts based on entered input
+void generateRandomFact(std::vector<std::string>& facts, std::vector<Submission>& allSub, std::vector<Knockout>& allKo); // generates random facts
+int randomNumberGenerator(std::vector<std::string>);	// will generate a random number
+std::vector<quickestFactStruct> findQuickestSubmissions(const std::vector<Submission>& allSub); // find the quickest submission
+std::vector<quickestFactStruct> findQuickestKnockouts(const std::vector<Knockout>&);	// find quickest KO
+
 
 // template to validate input within a specific range
 template <typename T>
@@ -33,12 +55,12 @@ void validateInput(T& input, const T& minValue, const T& maxValue) {
 	}
 }
 
-
 int main()
 {
 	std::vector<Bout> allBouts;	// vector to hold both submission and knockout finished bouts
 	std::vector<Submission> allSubmissions; // vector to store all submission ended bouts
 	std::vector<Knockout> allKnockouts; // vector to store all knockout ended bouts
+	
 
 	allBouts = combineAllBouts(allSubmissions, allKnockouts);	// combine submission and KO vectors into allBouts
 
@@ -59,6 +81,7 @@ int main()
 
 			break;
 		case 4:
+			displayFacts(allSubmissions, allKnockouts);
 			break;
 		}
 
@@ -102,7 +125,7 @@ int mainMenu() {
 	int userChoice = -1;	// variable to hold a users choice for the menu
 
 	cout << "1. Enter Bout" << endl;
-	cout << "2. List All Bouts" << endl;
+	cout << "2. List Bouts" << endl;
 	cout << "3. Leaderboards" << endl;
 	cout << "4. Random Fact Generator" << endl;
 	cout << "5. Exit" << endl;
@@ -370,7 +393,7 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 		cin >> selection;
 		validateInput(selection, 0, 3); // validate input
 
-		if (selection == 0) {
+		if (selection == 0) {	// submission bouts
 			cout << "All Fights Ending In Submission:" << endl;
 			for (int i = 0; i < allSub.size(); i++) {
 				cout << allSub[i].getBoutTitle() << " (" << allSub[i].getYear() << ")" << endl;
@@ -379,9 +402,8 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 				cout << "By " << allSub[i].getSubmissionType() << " from " << allSub[i].getpositionToString() << " in round " << allSub[i].getRound()
 					<< " at " << allSub[i].getMinute() << ":" << allSub[i].getSeconds() << endl;
 			}
-
 		}
-		else if (selection == 1) {
+		else if (selection == 1) {	// knockout bouts
 			cout << "All Fights Ending In Knockout:" << endl;
 			for (int i = 0; i < allKO.size(); i++) {
 				cout << allKO[i].getBoutTitle() << " (" << allKO[i].getYear() << ")" << endl;
@@ -391,7 +413,7 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 					<< " at " << allKO[i].getMinute() << ":" << allKO[i].getSeconds() << endl;
 			}
 		}
-		else if (selection == 2) {
+		else if (selection == 2) {	// all bouts
 			cout << "All Bouts:" << endl;
 			for (int i = 0; i < allBouts.size(); i++) {
 				cout << allBouts[i].getBoutTitle() << " (" << allBouts[i].getYear() << ")" << endl;
@@ -403,6 +425,129 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 		
 	} while (selection != 3);
 }
+void displayFacts(std::vector<Submission>& allSubs, std::vector<Knockout>& allKo) {
+	std::vector<std::string> facts(2);	// vector to hold facts
+
+	int selection = 0; // flag for user to generate or exit 
+	do {
+		cout << "(0 for a new fact || 1 to exit) " << endl;
+		cin >> selection;
+		validateInput(selection, 0, 1); // validate input
+
+		generateRandomFact(facts, allSubs, allKo); // call random fact generator to fill vector will facts
+		int randomNum = randomNumberGenerator(facts);	// get random number based on size of vector
+
+		cout << facts[randomNum] << endl;	// generate a fact
+		
+	} while (selection != 1);
+}
+int randomNumberGenerator(std::vector<std::string> facts) {
+	std::srand(static_cast<unsigned int>(std::time(nullptr))); // seed random number generator
+	int randomIndex = std::rand() % facts.size(); // generate random number based on vector size
+
+	return randomIndex;
+}
+void generateRandomFact(std::vector<std::string>& facts, std::vector<Submission>& allSub, std::vector<Knockout>& allKo) {
+    std::vector<quickestFactStruct> quickestSubmissions = findQuickestSubmissions(allSub);
+
+    std::string factOne = "The quickest submission was ";
+    for (const auto& sub : quickestSubmissions) {
+        factOne += sub.quickestFirst + " " + sub.quickestLast + " at " + std::to_string(sub.quickestMin) + ":" +
+         std::to_string(sub.quickestSec) + " in " + std::to_string(sub.quickestYear);
+        if (&sub != &quickestSubmissions.back()) {
+            factOne += ", ";
+        }
+    }
+
+	facts[0] = factOne;
+
+	std::vector<quickestFactStruct> quickestKnockouts = findQuickestKnockouts(allKo);
+	
+	std::string factTwo = "The quickest knockout was ";
+	for (const auto& ko : quickestKnockouts) {
+		factTwo += ko.quickestFirst + " " + ko.quickestLast + " at " + std::to_string(ko.quickestMin) + ":" +
+			std::to_string(ko.quickestSec) + " in " + std::to_string(ko.quickestYear);
+		if (&ko != &quickestKnockouts.back()) {
+			factTwo += ", ";
+		}
+	}
+
+	facts[1] = factTwo;
+
+
+
+}
+ std::vector<quickestFactStruct> findQuickestSubmissions(const std::vector<Submission>& allSub) {
+	std::vector<quickestFactStruct> quickestSubmissions;	// vector to hold structs
+
+	int minTime = std::numeric_limits<int>::max();	// flag set to highest int value
+	int minSeconds = std::numeric_limits<int>::max();	// flag for seconds
+
+	for (const auto& sub : allSub) {	
+		if (sub.getMinute() < minTime || (sub.getMinute() == minTime && sub.getSeconds() < minSeconds)) {	// checks for lower min and sec
+			minTime = sub.getMinute();	// adds the lower value
+			minSeconds = sub.getSeconds();
+
+			quickestFactStruct quickestStruct;	// instance of struct to hold new data
+			quickestStruct.quickestMin = minTime;
+			quickestStruct.quickestSec = minSeconds; 
+			quickestStruct.quickestYear = sub.getYear();
+			quickestStruct.quickestFirst = sub.getWinnerFirst();
+			quickestStruct.quickestLast = sub.getWinnerLast();
+
+			quickestSubmissions.clear(); // Clear previous quickest submissions
+			quickestSubmissions.push_back(quickestStruct);
+		}
+		else if (sub.getMinute() == minTime && sub.getSeconds() == minSeconds) {	// validates data looking for a tie
+			quickestFactStruct quickestStruct;
+			quickestStruct.quickestMin = minTime;
+			quickestStruct.quickestSec = minSeconds; 
+			quickestStruct.quickestYear = sub.getYear();
+			quickestStruct.quickestFirst = sub.getWinnerFirst();
+			quickestStruct.quickestLast = sub.getWinnerLast();
+
+			quickestSubmissions.push_back(quickestStruct);	// saves the tie instance
+		}
+	}
+
+	return quickestSubmissions;
+}
+std::vector<quickestFactStruct> findQuickestKnockouts(const std::vector<Knockout>& allKo) {
+	std::vector<quickestFactStruct> quickestKnockouts;  // vector to hold structs
+
+	int minTime = std::numeric_limits<int>::max();  // flag set to highest int value
+	int minSeconds = std::numeric_limits<int>::max();  // flag for seconds
+
+	for (const auto& ko : allKo) {
+		if (ko.getMinute() < minTime || (ko.getMinute() == minTime && ko.getSeconds() < minSeconds)) {
+			minTime = ko.getMinute();  // adds the lower value
+			minSeconds = ko.getSeconds();
+
+			quickestFactStruct quickestStruct;  // instance of struct to hold new data
+			quickestStruct.quickestMin = minTime;
+			quickestStruct.quickestSec = minSeconds;
+			quickestStruct.quickestYear = ko.getYear();
+			quickestStruct.quickestFirst = ko.getWinnerFirst();
+			quickestStruct.quickestLast = ko.getWinnerLast();
+
+			quickestKnockouts.clear();  // Clear previous quickest knockouts
+			quickestKnockouts.push_back(quickestStruct);
+		}
+		else if (ko.getMinute() == minTime && ko.getSeconds() == minSeconds) {
+			quickestFactStruct quickestStruct;
+			quickestStruct.quickestMin = minTime;
+			quickestStruct.quickestSec = minSeconds;
+			quickestStruct.quickestYear = ko.getYear();
+			quickestStruct.quickestFirst = ko.getWinnerFirst();
+			quickestStruct.quickestLast = ko.getWinnerLast();
+
+			quickestKnockouts.push_back(quickestStruct);  // saves the tie instance
+		}
+	}
+
+	return quickestKnockouts;
+}
+
 
 
 
