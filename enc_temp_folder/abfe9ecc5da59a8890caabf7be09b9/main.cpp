@@ -389,6 +389,7 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 	int selection;
 	do {
 		cout << "Select one to list (0 = submissions || 1 = knockouts || 2 = both || 3 = exit): ";
+		cin >> selection;
 		validateInput(selection, 0, 3); // validate input
 		cin.ignore(); // clear a newline
 
@@ -420,6 +421,8 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 			for (int i = 0; i < allBouts.size(); i++) {
 				cout << allBouts[i].getBoutTitle() << " (" << allBouts[i].getYear() << ")" << endl;
 				cout << "------------------------" << endl;
+				cout << "Number of bouts in allBouts vector: " << allBouts.size() << endl;
+
 			}
 
 		}
@@ -457,6 +460,7 @@ void displayFacts(std::vector<Submission>& allSubs, std::vector<Knockout>& allKo
 	int selection = 0; // flag for user to generate or exit 
 	do {
 		cout << "(0 for a new fact || 1 to exit) " << endl;
+		cin >> selection;
 		validateInput(selection, 0, 1); // validate input
 
 		generateRandomFact(facts, allSubs, allKo); // call random fact generator to fill vector will facts
