@@ -33,12 +33,14 @@ void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko); // user
 Submission createSubmission(); // creates submission object for use in vector
 Knockout createKnockout();	// creates a knockout object for use in vector
 void searchFighter(const std::vector<Submission>&, const std::vector<Knockout>&); // prompt user then search for fighter
+void capitalizeFirstLetter(std::string&);	// facilitate the search function using standard naming convention
 void listBouts(std::vector<Bout>& allBouts, std::vector<Submission>& allSub, std::vector<Knockout>& allKO);	// prints out desired bouts
 void displayFacts(std::vector<Submission>&, std::vector<Knockout>&); // will display random facts based on entered input
 void generateRandomFact(std::vector<std::string>& facts, std::vector<Submission>& allSub, std::vector<Knockout>& allKo); // generates random facts
 int randomNumberGenerator(std::vector<std::string>);	// will generate a random number
 std::vector<quickestFactStruct> findQuickestSubmissions(const std::vector<Submission>& allSub); // find the quickest submission
 std::vector<quickestFactStruct> findQuickestKnockouts(const std::vector<Knockout>&);	// find quickest KO
+
 
 
 // template to validate input within a specific range
@@ -101,7 +103,14 @@ void validate(int i) {	// validate int input (overloaded)
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 }
-
+void capitalizeFirstLetter(std::string& str) {
+	if (!str.empty()) {
+		str[0] = std::toupper(str[0]);
+		for (size_t i = 1; i < str.length(); ++i) {
+			str[i] = std::tolower(str[i]);
+		}
+	}
+}
 std::vector<Bout> combineAllBouts(std::vector<Submission>& allSubmissions, std::vector<Knockout>& allKnockouts) {
 
 	std::vector<Bout> combinedBouts;
@@ -427,11 +436,14 @@ void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::
 	} while (selection != 3);
 }
 void searchFighter(const std::vector<Submission>& allSub, const std::vector<Knockout>& allKo) {
+	cin.ignore();
 	std::string firstName, lastName;
 	std::cout << "Enter the fighter's first name: ";
 	getline(cin, firstName);
+	capitalizeFirstLetter(firstName);	// send it to get standarized
 	std::cout << "Enter the fighter's last name: ";
 	getline(cin, lastName);
+	capitalizeFirstLetter(lastName);
 	
 	int submissionCount = 0;
 	int knockoutCount = 0;
