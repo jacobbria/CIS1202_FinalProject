@@ -33,16 +33,23 @@ Bout::Bout(std::string wc, std::string wf, std::string wl,
 void  Bout::setWeightClass(const std::string& weightclass) {
 	weightClass = weightclass;
 }
-void  Bout::setWinnerFirst(const std::string& winnerfirst) {
+void Bout::setWinnerFirst(std::string& winnerfirst) {
+	capitalizeFirstLetter(winnerfirst);
 	winnerFirst = winnerfirst;
 }
-void  Bout::setWinnerLast(const std::string& winnerlast) {
+
+void Bout::setWinnerLast(std::string& winnerlast) {
+	capitalizeFirstLetter(winnerlast);
 	winnerLast = winnerlast;
 }
-void  Bout::setLoserFirst(const std::string& loserfirst) {
+
+void Bout::setLoserFirst(std::string& loserfirst) {
+	capitalizeFirstLetter(loserfirst);
 	loserFirst = loserfirst;
 }
-void Bout::setLoserLast(const std::string& loserlast) {
+
+void Bout::setLoserLast(std::string& loserlast) {
+	capitalizeFirstLetter(loserlast);
 	loserLast = loserlast;
 }
 void Bout::setTimeClock(int minute, int seconds) {
@@ -72,12 +79,15 @@ void Bout::setYear(int yr) {
 	std::string Bout::getWinnerFirst() const {
 		return winnerFirst;
 	}
+
 	std::string Bout::getWinnerLast() const {
 		return winnerLast;
 	}
+
 	std::string Bout::getLoserFirst() const {
 		return loserFirst;
 	}
+
 	std::string Bout::getLoserLast() const {
 		return loserLast;
 	}
@@ -97,4 +107,14 @@ void Bout::setYear(int yr) {
 		return year;
 	}
 	
+	// Ensure proper name grammar
+	void Bout::capitalizeFirstLetter(std::string& str) {
+		if (!str.empty()) {
+			str[0] = std::toupper(str[0]);
+			for (size_t i = 1; i < str.length(); ++i) {
+				str[i] = std::tolower(str[i]);
+			}
+		}
+	}
+
 	

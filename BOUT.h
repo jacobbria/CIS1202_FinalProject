@@ -31,12 +31,11 @@ public:
 		std::string losF, std::string losL, int min, int sec, int rd, int yr);
 	
 	// setter prototypes
-	void setBoutTitle();
 	void setWeightClass(const std::string& weightclass);
-	void setWinnerFirst(const std::string& winnerfirst);
-	void setWinnerLast(const std::string& winnerlast);
-	void setLoserFirst(const std::string& loserfirst);
-	void setLoserLast(const std::string& loserlast);
+	void setWinnerFirst(std::string& winnerfirst);
+	void setWinnerLast(std::string& winnerlast);
+	void setLoserFirst(std::string& loserfirst);
+	void setLoserLast(std::string& loserlast);
 	void setTimeClock(int minute, int seconds);
 	void setMinute(int min);
 	void setSeconds(int sec);
@@ -57,7 +56,8 @@ public:
 	int getRound() const;
 	int getYear() const;
 	
-
+	// ensure proper name grammar
+	void capitalizeFirstLetter(std::string& str);
 };
 
 #endif BOUT_H

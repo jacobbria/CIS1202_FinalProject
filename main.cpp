@@ -21,7 +21,7 @@ int mainMenu(); // creates a user driven menu
 void enterBout(std::vector<Submission>& sub, std::vector<Knockout>& ko); // user enters a Bout
 Submission createSubmission(); // creates submission object for use in vector
 Knockout createKnockout();	// creates a knockout object for use in vector
-void listFights(std::vector<Bout>& allBouts, std::vector<Submission>& allSub, std::vector<Knockout>& allKO);	// prints out 
+void listBouts(std::vector<Bout>& allBouts, std::vector<Submission>& allSub, std::vector<Knockout>& allKO);	// prints out 
 
 // template to validate input within a specific range
 template <typename T>
@@ -53,7 +53,7 @@ int main()
 			enterBout(allSubmissions, allKnockouts); // send vectors by reference to get updated with new bouts
 			break;
 		case 2:
-			listFights(allBouts, allSubmissions, allKnockouts);	// send the vectors to loop and print all fights
+			listBouts(allBouts, allSubmissions, allKnockouts);	// send the vectors to loop and print all fights
 			break;
 		case 3:
 
@@ -363,7 +363,7 @@ Knockout createKnockout() {
 
 	return knockout; // send created knockout object back
 }
-void listFights(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::vector<Knockout>& allKO) {
+void listBouts(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std::vector<Knockout>& allKO) {
 	int selection;
 	do {
 		cout << "Select one to list (0 = submissions || 1 = knockouts || 2 = both || 3 = exit): ";
@@ -371,7 +371,7 @@ void listFights(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std:
 		validateInput(selection, 0, 3); // validate input
 
 		if (selection == 0) {
-			cout << "Listing Submission Fights:" << endl;
+			cout << "All Fights Ending In Submission:" << endl;
 			for (int i = 0; i < allSub.size(); i++) {
 				cout << allSub[i].getBoutTitle() << " (" << allSub[i].getYear() << ")" << endl;
 				cout << "------------------------" << endl;
@@ -379,21 +379,28 @@ void listFights(std::vector<Bout>& allBouts,std::vector<Submission>& allSub,std:
 				cout << "By " << allSub[i].getSubmissionType() << " from " << allSub[i].getpositionToString() << " in round " << allSub[i].getRound()
 					<< " at " << allSub[i].getMinute() << ":" << allSub[i].getSeconds() << endl;
 			}
-		//}
-		//else if (selection == 1) {
-			//cout << "Listing Knockout Fights:" << endl;
-			//for (const Knockout& ko : allBouts) {
-				// Print knockout-specific information using 'ko'
-				// Example: cout << ko.getKnockoutTechnique() << ", " << ko.getWinnerFirst() << " " << ko.getWinnerLast() << endl;
-			//}
-		//}
-		//else if (selection == 2) {
-			//cout << "Listing All Fights:" << endl;
-			//for (const Bout& bout : allBouts) {
-				// Print general bout information using 'bout'
-				// Example: cout << bout.getRound() << " rounds, " << bout.getYear() << endl;
-			//}
+
 		}
+		else if (selection == 1) {
+			cout << "All Fights Ending In Knockout:" << endl;
+			for (int i = 0; i < allKO.size(); i++) {
+				cout << allKO[i].getBoutTitle() << " (" << allKO[i].getYear() << ")" << endl;
+				cout << "------------------------" << endl;
+				cout << "Winner: " << allKO[i].getWinnerLast() << ", " << allKO[i].getWinnerFirst() << endl;
+				cout << "By " << allKO[i].getKnockoutTechnique() << " in round " << allKO[i].getRound()
+					<< " at " << allKO[i].getMinute() << ":" << allKO[i].getSeconds() << endl;
+			}
+		}
+		else if (selection == 2) {
+			cout << "All Bouts:" << endl;
+			for (int i = 0; i < allBouts.size(); i++) {
+				cout << allBouts[i].getBoutTitle() << " (" << allBouts[i].getYear() << ")" << endl;
+				cout << "------------------------" << endl;
+				
+			}
+
+		}
+		
 	} while (selection != 3);
 }
 
