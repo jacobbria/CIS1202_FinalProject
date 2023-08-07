@@ -1,0 +1,46 @@
+Below is the rubric given for this assignment.
+
+CIS 1202 Final Project - Assignment Instructions
+
+As part of your final assessment in this course, you are to design and develop a program of your own design and choosing. There is a list of ideas below, but you can come up with your own idea. Read all the instructions very carefully and review the grading rubric for this assignment. The grading rubric will be used to grade your final project.
+Your final program must be original and not based on any assignments in this or any other course. This project is also assessing your ability to problem solve: Can you design a program from the topics below?
+
+Suggested Topics:
+•	Statistics (sports, video games, etc...)
+•	Business (accounting, warehousing, retail, etc...)
+•	Home inventory system (inventory your belongings, your film collection, your music collection, your antiques collection, etc...)
+•	Dictionary (Spanish-English, Thesaurus, Quotes, rhymes, Scrabble, etc…)
+•	Personal finance (Expense tracker, check book, Monthly budget)
+•	Personal development (calorie tracker, exercise log, to do list, etc…)
+
+Grading Rubric for This Assignment:
+
+Criteria - Range – Low End (Did not do or did very little effort)	Range – High End (Used correctly and spent time/effort on programming)
+
+Names of variables are meaningful and the program comments self-document the program.	0	5
+
+Program documentation includes instructions on how to use the program	0	5
+
+Math operations (for max points use built-in math functions) NOTE: Increment does not count as a math operation.	0	5
+
+Class type in a separate .h file with member functions (accessor functions, get, set, show, display find, etc.) For full points, include an overloaded function	0	20
+
+Base/Derived classes or a template	0	10
+
+Binary file	0	5
+
+User instructions are clear	0	10
+
+Program design is logical and well-organized	0	10
+
+Provide screen shots of the program executed with 3 sets of test data.	0	5
+
+Validated user input	0	5
+
+Formatted the output so it is easy to read and aligned	0	5
+
+The program executes without error and the output is correct	0	10
+
+The zipped program folder and screens shots of the code and console are uploaded to dropbox.	0	5
+
+　Total Points Possible 100
